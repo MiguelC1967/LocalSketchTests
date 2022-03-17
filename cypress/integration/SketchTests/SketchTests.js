@@ -1,7 +1,8 @@
 // SketchTests.js created with Cypress
 //
 
-describe('Sketch Page test', () =>{
+describe('Sketch Sign In Page test', () =>{
+
     it ('Happy Path login', () => {
         cy.visit('https://www.sketch.com/signin')
 
@@ -18,7 +19,37 @@ describe('Sketch Page test', () =>{
         cy.get(".sc-fXMSbX > :nth-child(1) > .sc-hiwReK" , { timeout: 10000 }).click() // the timeout is to ensure the popup 
                                                                                        // is deployed
 
-        cy.wait(5000) // shows the main user screen and quits
+        cy.get (':nth-child(1) > .sc-kIoiNz > .sc-itBoPw > .sc-dnXIZM > .sc-hiwReK').click() // Click on Protect Your Account    
+        
+        cy.wait(2000) // Pause to show the screen
+
+        cy.get('.sc-iaUyKn > .sc-hKwCoD').click() // Click on User's Workspace pulldown
+        cy.get(':nth-child(2) > .sc-fIoroj > .sc-gjNGvZ').click() // Go back to the workspace
+
+        // Since Cypress does not work with multiple tabs, I check the address in the attribute is ok - Save a Document to the Workspace
+        cy.get(':nth-child(2) > .sc-kIoiNz > .sc-itBoPw > .sc-dnXIZM > .sc-hiwReK').should('have.attr', 'href', 'sketch://sketch.cloud/') 
+
+        cy.get(':nth-child(3) > .sc-kIoiNz > .sc-itBoPw > .sc-dnXIZM > .sc-hiwReK').click() // Click on Start Collaborating
+        cy.wait(2000) // Pause to show the screen
+
+        cy.get('.sc-hKwCoD').click() // Click on User's Workspace pulldown
+        cy.get(':nth-child(2) > .sc-fIoroj > .sc-gjNGvZ').click() // Go back to the workspace -- this does not work
+        cy.go(-2)                                                 // So I have to click twice on the back browser button
+
+       // Since Cypress does not work with multiple tabs, I check the address in the attribute is ok - Get Better at Sketch
+       cy.get(':nth-child(4) > .sc-kIoiNz > .sc-itBoPw > .sc-dnXIZM > .sc-hiwReK').should('have.attr', 'href', 'https://www.sketch.com/docs/') 
+
+       cy.get(':nth-child(6) > .sc-ihIMkv').click() // Shared with me
+       cy.wait(1000)
+
+       cy.get(':nth-child(7) > .sc-ihIMkv').click() // Libraries
+       cy.wait(1000)
+
+       cy.get(':nth-child(8) > .sc-ihIMkv').click() // My Drafts
+       cy.wait(1000)
+
+       cy.get(':nth-child(9) > .sc-ihIMkv').click() // Trash
+       cy.wait(3000)
     })
 
     it ('Bad username syntax login', () => {
@@ -79,4 +110,23 @@ describe('Sketch Page test', () =>{
 
         cy.wait(2500) // shows the bad password error message and quits  
     })
+
+    it ('Make password visible', () => {
+        cy.visit('https://www.sketch.com/signin')
+
+        // set username and password in the cypress.env.json file
+
+        cy.get("#text-input").should('be.visible').type(Cypress.env('user_name')).should('have.value', Cypress.env('user_name'))
+
+        cy.get('[data-testid="input"]').should('be.visible').type(Cypress.env('user_password'), {log: false})
+
+        cy.get('[data-testid="eye-icon"]').click() // reveals password
+
+        cy.wait(3000)
+
+        cy.get('[data-testid="eye-icon"]').click() // hides password
+
+        cy.wait(2500) // shows the main user screen and quits
+    })
+
 })
