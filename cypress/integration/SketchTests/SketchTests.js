@@ -3,7 +3,7 @@
 
 describe('Sketch Sign In Page test', () =>{
 
-    it ('Happy Path login', () => {
+    it ('Happy Path login and Workspace navigation', () => {
         cy.visit('https://www.sketch.com/signin')
 
         // set username and password in the cypress.env.json file
@@ -16,7 +16,7 @@ describe('Sketch Sign In Page test', () =>{
 
         // "Get Started for Free" popup
 
-        cy.get(".sc-fXMSbX > :nth-child(1) > .sc-hiwReK" , { timeout: 10000 }).click() // the timeout is to ensure the popup 
+        cy.get(".sc-fXMSbX > :nth-child(1) > .sc-hiwReK" , { timeout: 12000 }).click() // the timeout is to ensure the popup 
                                                                                        // is deployed
 
         cy.get (':nth-child(1) > .sc-kIoiNz > .sc-itBoPw > .sc-dnXIZM > .sc-hiwReK').click() // Click on Protect Your Account    
