@@ -1,9 +1,5 @@
 // SketchTests.js created with Cypress
 //
-// Start writing your Cypress tests below!
-// If you're unfamiliar with how Cypress works,
-// check out the link below and learn how to write your first test:
-// https://on.cypress.io/writing-first-test
 
 describe('Sketch Page test', () =>{
     it ('Happy Path login', () => {
@@ -25,16 +21,14 @@ describe('Sketch Page test', () =>{
         cy.wait(5000) // show the main user screen and quits
     })
 
-    it ('Bad username login', () => {
+    it ('Bad username syntax login', () => {
         cy.visit('https://www.sketch.com/signin')
 
         // We use a username with a bad syntax to force an error
 
         cy.get("#text-input").should('be.visible').type('Bad Username')
-
         cy.get('[data-testid="input"]').type(Cypress.env('user_password'), {log: false})
 
-        cy.get(".sc-jWa-DWe > .sc-hiwReK").click()
-
+        cy.get(".sc-jftGvU").should('be.visible')
     })
 })
