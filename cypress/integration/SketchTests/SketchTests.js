@@ -12,7 +12,7 @@ describe('Sketch Sign In Page test', () =>{
 
         cy.get('[data-testid="input"]').should('be.visible').type(Cypress.env('user_password'), {log: false})
 
-        cy.get(".sc-jWa-DWe > .sc-hiwReK").click()
+        cy.get(".sc-jWa-DWe > .sc-hiwReK").click() // Sign In button
 
         // "Get Started for Free" popup
 
@@ -74,7 +74,7 @@ describe('Sketch Sign In Page test', () =>{
 
         cy.get('[data-testid="input"]').should('be.visible').type('PasswordIncorrect')
 
-        cy.get(".sc-jWa-DWe > .sc-hiwReK").click()
+        cy.get(".sc-jWa-DWe > .sc-hiwReK").click() // Sign In button
 
         cy.get(".sc-jftGvU").should('be.visible') // check if the error message is visible
   
@@ -90,7 +90,7 @@ describe('Sketch Sign In Page test', () =>{
 
         cy.get('[data-testid="input"]').should('be.visible').type('PasswordIncorrect')
 
-        cy.get(".sc-jWa-DWe > .sc-hiwReK").click()
+        cy.get(".sc-jWa-DWe > .sc-hiwReK").click() // Sign In button
 
         cy.get(".sc-jftGvU").should('be.visible') // check if the error message is visible
   
@@ -98,9 +98,9 @@ describe('Sketch Sign In Page test', () =>{
     })
 
     it ('Forgot Password?', () => {
-        cy.visit('https://www.sketch.com/signin')
+        cy.visit('https://www.sketch.com/signin') 
 
-        cy.get(".sc-furvIG > .sc-bTfYlY").click()
+        cy.get(".sc-furvIG > .sc-bTfYlY").click() // forgot Password link
 
         cy.get("#email-input").should('be.visible').type(Cypress.env('user_name')).should('have.value', Cypress.env('user_name'))
 
@@ -128,5 +128,4 @@ describe('Sketch Sign In Page test', () =>{
 
         cy.wait(2500) // shows the main user screen and quits
     })
-
 })
