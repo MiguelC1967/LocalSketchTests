@@ -26,6 +26,7 @@ describe('Sketch Sign In Page test', () =>{
         cy.get('.sc-iaUyKn > .sc-hKwCoD').click() // Click on User's Workspace pulldown
         cy.get(':nth-child(2) > .sc-fIoroj > .sc-gjNGvZ').click() // Go back to the workspace
 
+
         // Since Cypress does not work with multiple tabs, I check the address in the attribute is ok - Save a Document to the Workspace
         cy.get(':nth-child(2) > .sc-kIoiNz > .sc-itBoPw > .sc-dnXIZM > .sc-hiwReK').should('have.attr', 'href', 'sketch://sketch.cloud/') 
 
@@ -39,16 +40,19 @@ describe('Sketch Sign In Page test', () =>{
        // Since Cypress does not work with multiple tabs, I check the address in the attribute is ok - Get Better at Sketch
        cy.get(':nth-child(4) > .sc-kIoiNz > .sc-itBoPw > .sc-dnXIZM > .sc-hiwReK').should('have.attr', 'href', 'https://www.sketch.com/docs/') 
 
-       cy.get(':nth-child(6) > .sc-ihIMkv').click() // Shared with me
+       cy.get('.sc-ksDcUF > :nth-child(1) > .sc-ihIMkv').click() // Updates link
+       cy.get('.sc-iaUyKn > .sc-hKwCoD').click() // Click on User's Workspace pulldown
+       cy.get(':nth-child(2) > .sc-fIoroj > .sc-gjNGvZ').click() // Go back to the workspace
+
+       cy.get(':nth-child(6) > .sc-ihIMkv').click() // Shared with me link
        cy.wait(1000)
 
-       cy.get(':nth-child(7) > .sc-ihIMkv').click() // Libraries
+       cy.get(':nth-child(7) > .sc-ihIMkv').click() // Libraries link
+
+       cy.get(':nth-child(8) > .sc-ihIMkv').click() // My Drafts link
        cy.wait(1000)
 
-       cy.get(':nth-child(8) > .sc-ihIMkv').click() // My Drafts
-       cy.wait(1000)
-
-       cy.get(':nth-child(9) > .sc-ihIMkv').click() // Trash
+       cy.get(':nth-child(9) > .sc-ihIMkv').click() // Trash link
        cy.wait(3000)
     })
 
